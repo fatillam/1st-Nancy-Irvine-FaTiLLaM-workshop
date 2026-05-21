@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1st Nancy–Irvine FaTiLLaM Workshop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --ink-soft: #444;
+    --ink-faint: #8a8a8a;
+    --paper: #fbf9f4;
+    --rule: #d8d2c4;
+    --accent: #6b2d2d;
+    --serif: 'EB Garamond', Georgia, 'Times New Roman', serif;
+    --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 19px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 4rem 1.75rem 6rem;
+  }
+
+  /* ---------- Header ---------- */
+  header.masthead {
+    text-align: center;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 3rem;
+  }
+
+  .eyebrow {
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 1.5rem;
+  }
+
+  h1 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(2rem, 5vw, 2.9rem);
+    line-height: 1.15;
+    margin: 0 0 0.5rem;
+    letter-spacing: -0.01em;
+  }
+
+  .subtitle {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.3rem;
+    color: var(--ink-soft);
+    margin: 0 0 1.75rem;
+    font-weight: 400;
+  }
+
+  .meta {
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.04em;
+  }
+
+  .meta .sep {
+    display: inline-block;
+    margin: 0 0.6rem;
+    color: var(--ink-faint);
+  }
+
+  /* ---------- Section headings ---------- */
+  h2 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 1.5rem;
+    margin: 3.5rem 0 1.5rem;
+    letter-spacing: -0.005em;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 0.5rem;
+  }
+
+  h3.day {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 0.75rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 2.5rem 0 1rem;
+  }
+
+  /* ---------- Description ---------- */
+  .description p {
+    margin: 0 0 1rem;
+    color: var(--ink-soft);
+  }
+
+  .description a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(107, 45, 45, 0.3);
+    transition: border-color 0.2s;
+  }
+  .description a:hover { border-bottom-color: var(--accent); }
+
+  /* ---------- Schedule ---------- */
+  .schedule {
+    margin-top: 0.5rem;
+  }
+
+  .slot {
+    display: grid;
+    grid-template-columns: 7.5rem 1fr;
+    gap: 1.25rem;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: baseline;
+  }
+
+  .slot:last-child { border-bottom: none; }
+
+  .slot .time {
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.02em;
+    font-variant-numeric: tabular-nums;
+    padding-top: 0.15rem;
+  }
+
+  .slot .content {
+    font-family: var(--serif);
+  }
+
+  .slot .speaker {
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .slot .affiliation {
+    color: var(--ink-faint);
+    font-style: italic;
+    font-size: 0.95em;
+  }
+
+  .slot .talk {
+    display: block;
+    color: var(--ink-soft);
+    font-style: italic;
+    margin-top: 0.1rem;
+    font-size: 0.97em;
+  }
+
+  .slot.break .content {
+    color: var(--ink-faint);
+    font-style: italic;
+    font-size: 0.95em;
+  }
+
+  .slot a.talk-link {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px dotted var(--ink-faint);
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .slot a.talk-link:hover {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+
+  /* ---------- Abstracts ---------- */
+  .abstract {
+    padding: 1.75rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .abstract:last-child { border-bottom: none; }
+
+  .abstract h3 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 1.25rem;
+    margin: 0 0 0.35rem;
+    line-height: 1.3;
+    letter-spacing: -0.005em;
+    scroll-margin-top: 2rem;
+  }
+
+  .abstract .who {
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .abstract p {
+    margin: 0 0 0.9rem;
+    color: var(--ink-soft);
+    text-align: justify;
+    hyphens: auto;
+  }
+  .abstract p:last-child { margin-bottom: 0; }
+
+  .tba {
+    color: var(--accent);
+    font-style: italic;
+    opacity: 0.75;
+  }
+
+  /* ---------- Footer ---------- */
+  footer {
+    margin-top: 5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--rule);
+    font-family: var(--sans);
+    font-size: 0.75rem;
+    color: var(--ink-faint);
+    text-align: center;
+    letter-spacing: 0.05em;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 560px) {
+    .wrap { padding: 2.5rem 1.25rem 4rem; }
+    body { font-size: 17px; }
+    .slot {
+      grid-template-columns: 1fr;
+      gap: 0.25rem;
+    }
+    .slot .time {
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .meta .sep { display: none; }
+    .meta > span { display: block; margin: 0.2rem 0; }
+  }
+
+  @media print {
+    body { background: white; font-size: 11pt; }
+    .wrap { max-width: none; padding: 0.5in; }
+    h2, h3.day { page-break-after: avoid; }
+    .abstract { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="eyebrow">FaTiLLaM &middot; Nancy &mdash; Irvine</div>
+    <h1>1st Nancy–Irvine FaTiLLaM Workshop</h1>
+    <p class="subtitle">Formalization in Logic, Language, and Mathematics</p>
+    <div class="meta">
+      <span>8–9 June 2026</span>
+      <span class="sep">·</span>
+      <span>Social &amp; Behavioral Sciences Gateway, Room 1321</span>
+      <span class="sep">·</span>
+      <span>UC Irvine</span>
+    </div>
+  </header>
+
+  <section class="description">
+    <p>This event is part of <em>FaTiLLaM</em> (Formalization as Translation in Logic, Language, and Mathematics), a five-year joint research project funded by the CNRS, the Université de Lorraine, and the University of California, Irvine.</p>
+    <p>The project is carried out jointly by the <a href="https://poincare.univ-lorraine.fr/">Archives Henri-Poincaré</a> (CNRS UMR 7117), a research unit of the Université de Lorraine in Nancy and the Université de Strasbourg, and the <a href="https://www.calpha.uci.edu/">Center for the Advancement of Logic, its Philosophy, History, and Applications</a> (C-ALPHA) at the University of California, Irvine.</p>
+  </section>
+
+  <section>
+    <h2>Schedule</h2>
+
+    <h3 class="day">Monday, 8 June</h3>
+    <div class="schedule">
+      <div class="slot">
+        <div class="time">10:00 – 11:00</div>
+        <div class="content">
+          <span class="speaker">Andrew Arana</span> <span class="affiliation">(Nancy)</span>
+          <a class="talk-link" href="#arana"><span class="talk">Finitism Revisited: Takeuti's philosophy of mathematics</span></a>
+        </div>
+      </div>
+      <div class="slot break">
+        <div class="time">11:00 – 11:15</div>
+        <div class="content">Coffee</div>
+      </div>
+      <div class="slot">
+        <div class="time">11:15 – 12:15</div>
+        <div class="content">
+          <span class="speaker">Josiah Lopez-Wild</span> <span class="affiliation">(Irvine)</span>
+          <a class="talk-link" href="#lopez-wild"><span class="talk">Title TBA</span></a>
+        </div>
+      </div>
+      <div class="slot break">
+        <div class="time">12:15 – 1:30</div>
+        <div class="content">Lunch</div>
+      </div>
+      <div class="slot">
+        <div class="time">1:30 – 2:30</div>
+        <div class="content">
+          <span class="speaker">Jeremy Heis</span> <span class="affiliation">(Irvine)</span>
+          <a class="talk-link" href="#heis"><span class="talk">Kant on the laws of logic</span></a>
+        </div>
+      </div>
+      <div class="slot break">
+        <div class="time">2:30 – 2:45</div>
+        <div class="content">Coffee</div>
+      </div>
+      <div class="slot">
+        <div class="time">2:45 – 3:45</div>
+        <div class="content">
+          <span class="speaker">Orestis Dimou Belegratis</span> <span class="affiliation">(Irvine)</span>
+          <a class="talk-link" href="#belegratis"><span class="talk">Higher-Level Plurals: Why Pluralists need not run for Cover</span></a>
+        </div>
+      </div>
+      <div class="slot break">
+        <div class="time">3:45 – 4:00</div>
+        <div class="content">Coffee</div>
+      </div>
+      <div class="slot">
+        <div class="time">4:00 – 5:00</div>
+        <div class="content">
+          <span class="speaker">Rémi Blondel</span> <span class="affiliation">(Nancy)</span>
+          <a class="talk-link" href="#blondel"><span class="talk">Formalizing continuity (in France around 1900)</span></a>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="day">Tuesday, 9 June</h3>
+    <div class="schedule">
+      <div class="slot">
+        <div class="time">10:00 – 11:00</div>
+        <div class="content">
+          <span class="speaker">Baptiste Mélès</span> <span class="affiliation">(Nancy)</span>
+          <a class="talk-link" href="#meles"><span class="talk">Implicit linguistic aspects of programming languages</span></a>
+        </div>
+      </div>
+      <div class="slot break">
+        <div class="time">11:00 – 11:15</div>
+        <div class="content">Coffee</div>
+      </div>
+      <div class="slot">
+        <div class="time">11:15 – 12:15</div>
+        <div class="content">
+          <span class="speaker">Curtis Mason</span> <span class="affiliation">(Irvine)</span>
+          <a class="talk-link" href="#mason"><span class="talk">µ- and ρ-equivalence in the λNWF calculus</span></a>
+        </div>
+      </div>
+      <div class="slot break">
+        <div class="time">12:15 – 1:30</div>
+        <div class="content">Lunch</div>
+      </div>
+      <div class="slot">
+        <div class="time">1:30 – 2:30</div>
+        <div class="content">
+          <span class="speaker">Kenny Easwaran</span> <span class="affiliation">(Irvine)</span>
+          <a class="talk-link" href="#easwaran"><span class="talk">Several AI Futures for Mathematical Proof</span></a>
+        </div>
+      </div>
+      <div class="slot break">
+        <div class="time">2:30 – 2:45</div>
+        <div class="content">Coffee</div>
+      </div>
+      <div class="slot">
+        <div class="time">2:45 – 3:45</div>
+        <div class="content">
+          <span class="speaker">Antoine Mercier</span> <span class="affiliation">(Irvine)</span>
+          <a class="talk-link" href="#mercier"><span class="talk">Linguistic Options in the Foundations of Mathematics</span></a>
+        </div>
+      </div>
+      <div class="slot break">
+        <div class="time">3:45 – 4:00</div>
+        <div class="content">Coffee</div>
+      </div>
+      <div class="slot">
+        <div class="time">4:00 – 5:00</div>
+        <div class="content">
+          <span class="speaker">Wesley Wrigley</span> <span class="affiliation">(Nancy)</span>
+          <a class="talk-link" href="#wrigley"><span class="talk">Foundationalism and the Axioms of Mathematics</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Abstracts</h2>
+
+    <article class="abstract" id="arana">
+      <h3>Finitism Revisited: Takeuti's philosophy of mathematics</h3>
+      <div class="who">Andrew Arana &middot; Nancy</div>
+      <p>Many accounts of mathematical knowledge take intuition to be a source. Knowledge of the infinite, then, poses a problem, for it seems difficult to intuit the infinite. In this talk I will discuss Gaisi Takeuti's account of mathematical knowledge of the infinite. Takeuti was a mathematical logician whose philosophical context drew on the work of Kitaro Nishida, the founder of the Kyoto School of philosophy. I will discuss Nishida's conception of intuition, show how Takeuti adopted this conception, and explain how Takeuti could use this conception of intuition to give a more expansive account of intuitive knowledge of the infinite than is standard in the philosophy of mathematics since Hilbert.</p>
+    </article>
+
+    <article class="abstract" id="lopez-wild">
+      <h3>Title TBA</h3>
+      <div class="who">Josiah Lopez-Wild &middot; Irvine</div>
+      <p class="tba">Title and abstract forthcoming.</p>
+    </article>
+
+    <article class="abstract" id="heis">
+      <h3>Kant on the laws of logic</h3>
+      <div class="who">Jeremy Heis &middot; Irvine</div>
+      <p>This talk will try to articulate what, for Kant, the laws of logic are. By "laws of logic," I mean those unprovable truths of logic — such as the principle of non-contradiction, the principle of identity, the law of excluded middle, and the <em>dictum de omni et nullo</em> — that are used to prove other truths of the science of logic. I will try to enumerate these laws and explain their content. Along the way, I'll say some things about what negation, disjunction, and conditionals are for Kant, and what kinds of inferences he recognizes. I'll close with some comments on the relations between logic and analyticity.</p>
+    </article>
+
+    <article class="abstract" id="belegratis">
+      <h3>Higher-Level Plurals: Why Pluralists need not run for Cover</h3>
+      <div class="who">Orestis Dimou Belegratis &middot; Irvine</div>
+      <p>Since the seminal works of Boolos (1984, 1985) plural logic has attracted the attention of philosophers and has been widely embraced for mainly two reasons: (1) the ontological innocence of its intended interpretation, and (2) the fact that it is more expressive than first-order logic. Even though numerous philosophers are sympathetic to plural logic, the same cannot be said of higher-level plural logic (Rayo, 2006). Higher-level plurals are supposed to result from iterating the plural idiom, but both their existence in natural language and their conceptual intelligibility are vexed issues.</p>
+      <p>In this talk, I will argue that their conceptual intelligibility is not an issue. I provide an account of the intended interpretation of higher-level plural logic that is compatible with that of (simple) plural logic. In addition, I will carry out a careful formal and philosophical comparison between higher-level plural logic and the generalized-cover approach to plurals (Payton, 2025; Nicolas &amp; Payton, 2025, forthcoming). I take the latter to be the more promising philosophical rival of the former. However, philosophically, I argue that my proposal does not fall prey to Payton's arguments against higher-level plurals. Formally, I prove that higher-level plural logic and the logic of covers, viewed as many-sorted first-order theories, are definitionally equivalent, thus providing a precise insight into the relationship between the two approaches.</p>
+    </article>
+
+    <article class="abstract" id="blondel">
+      <h3>Formalizing continuity (in France around 1900)</h3>
+      <div class="who">Rémi Blondel &middot; Nancy</div>
+      <p>In this presentation, I will examine the works of Émile Borel and Henri Poincaré as two distinct ways of formalizing continuity in mathematics. Beyond a purely technical disagreement, these approaches reflect different understandings of what continuity is and reveal socially situated intellectual aims. Each conception is indeed embedded in a broader vision of the physical and social world, as well as in different political projects, which shape the way continuity is interpreted, defined, and mathematically formalized by these two mathematicians.</p>
+    </article>
+
+    <article class="abstract" id="meles">
+      <h3>Implicit linguistic aspects of programming languages</h3>
+      <div class="who">Baptiste Mélès &middot; Nancy</div>
+      <p>It may sound strange to use linguistics to examine formal languages such as programming languages. As a matter of fact, all their components seem to be explicit: alphabet, lexicon, syntax, semantics. However, I will show that the linguistic approach may reveal some hidden aspects in the practice of such languages: concerning the alphabet, one should distinguish between a graphetics and a graphematics; the lexicon has a differential structure; a morphology is hidden under the syntax; a pragmatics comes on top of the semantics. All such features in the practice of programming languages are common with human languages.</p>
+    </article>
+
+    <article class="abstract" id="mason">
+      <h3>µ- and ρ-equivalence in the λNWF calculus</h3>
+      <div class="who">Curtis Mason &middot; Irvine</div>
+      <p class="tba">Abstract forthcoming.</p>
+    </article>
+
+    <article class="abstract" id="easwaran">
+      <h3>Several AI Futures for Mathematical Proof</h3>
+      <div class="who">Kenny Easwaran &middot; Irvine</div>
+      <p>Since the early 20th century, there has been an uneasy relationship between mathematical proofs, as published, and formal proofs, as defined in various systems like first-order ZFC or various forms of type theory. Some philosophers have argued that published mathematical proofs derive their status from their association with formal proofs, but Easwaran (2008, 2015) argued that they do not. Instead, the standards of the mathematical community seem to be that published proofs should be "transferable" (they should enable members of the target audience to generate autonomous knowledge of the conclusion, without essentially depending on trusting the author), and "convertible" (spelled out at a level of detail that is sufficient to convert any possible rebutting defeaters (potential counterexamples) into undercutting defeaters (demonstrations that some particular step in the argument fails)). This is the standard even though most readers do trust the author for at least some results, rather than forming their own autonomous knowledge, and even though most published proofs never have any rebutting defeaters.</p>
+      <p>He argued that these standards distinguish math from empirical sciences, where the standards are not so demanding. In empirical sciences, readers expect to have to trust the author — though they ask that there be some description of the methods. Probabilistic statistical tests are accepted, even though statistical tests are not convertible. He argued that mathematicians insist on these stronger standards, while not insisting on the production of a formal proof, in part because of some contingent facts about the level of difficulty of the work. Lower standards would result in too much publication, while higher standards would result in too little.</p>
+      <p>The rise of artificial intelligence threatens to change this situation in several ways. In the past few decades, proof assistants like Coq, Isabelle, and Lean have made formal proof more accessible than it was through most of the 20th century, though not enough so to make it practically accessible for most mathematical results. Meanwhile, generative AI language models have made it easy to generate text that looks like standard mathematical proofs (which may or may not rise to the level of what de Toffoli calls "simil-proofs"), but haven't made it any easier to check whether they meet the standards for publication. This threatens to overwhelm the refereeing process at journals. Depending on future developments, there are several directions the mathematical community could go.</p>
+      <p>If similar AI tools enable the automated conversion of ordinary proofs into formal proofs ("autoformalization"), one natural response would be to insist on including formal proofs together with ordinary proofs in publication, raising epistemic standards. If autoformalization remains out of reach, a suggestion by Emily Riehl is that formalization might be required for proofs constructed by language models (though it is unclear how such a requirement could be enforced). But I argue that another rational possibility may turn out to be the embrace of the lower epistemic standards of the empirical sciences.</p>
+    </article>
+
+    <article class="abstract" id="mercier">
+      <h3>Linguistic Options in the Foundations of Mathematics</h3>
+      <div class="who">Antoine Mercier &middot; Irvine</div>
+      <p>It is nowadays common to see set theory, type theory, and category theory all proposed as foundations for mathematics. It then becomes a natural question to ask what the similarities and differences are in how these theories play their roles as foundations. While discussions in this area tend to emphasize the similarities between these foundational frameworks, in this talk I want to make clear an important mismatch in the interpretative strength between theories axiomatized in the languages of sets and types. I will then introduce two different languages associated with categories which can help provide a bridge between the languages of types and sets. This will help isolate the cause of the mismatch in interpretative strength as well as clarify the picture of how these foundational frameworks relate to one another.</p>
+    </article>
+
+    <article class="abstract" id="wrigley">
+      <h3>Foundationalism and the Axioms of Mathematics</h3>
+      <div class="who">Wesley Wrigley &middot; Nancy</div>
+      <p>Epistemic foundationalism typically appears in the philosophy of mathematics as the view that mathematical knowledge is based on watertight deduction from axioms, which are themselves self-evident, and hence do not require a proof in order to be known. This view, known as the Euclidean Programme, was dominant for over 2,000 years in the West, but no longer enjoys widespread support among philosophers of mathematics. Although there is now broad agreement that the Euclidean Programme is not correct, at least as an epistemology of mathematics as a whole, less attention has been paid to how its collapse in credibility came about. I argue that a variety of distinct practices have developed in modern mathematics that cannot be adequately explained from the perspective of Euclidean foundationalism.</p>
+    </article>
+
+  </section>
+
+  <footer>
+    FaTiLLaM &middot; Archives Henri-Poincaré · C-ALPHA
+  </footer>
+
+</div>
+</body>
+</html>
